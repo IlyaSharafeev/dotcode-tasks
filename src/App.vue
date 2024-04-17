@@ -1,27 +1,17 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png" />
-  <HelloWorld msg="Welcome to Your Vue.js + TypeScript App" />
+  <component :is="layout"></component>
 </template>
 
-<script lang="ts">
-import { defineComponent } from "vue";
-import HelloWorld from "./components/HelloWorld.vue";
+<script lang="ts" setup>
+import { computed } from "vue";
+import MainLayout from "./layouts/MainLayout.vue";
+import { useRouter } from "vue-router";
 
-export default defineComponent({
-  name: "App",
-  components: {
-    HelloWorld,
-  },
+const router = useRouter();
+
+const layout = computed(() => {
+  return router.currentRoute.value.meta.layout || MainLayout;
 });
 </script>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
+<style></style>
