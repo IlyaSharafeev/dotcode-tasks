@@ -4,9 +4,19 @@ import MainLayout from "../layouts/MainLayout.vue";
 const routes: Array<RouteRecordRaw> = [
   {
     path: "/",
-    name: "CreateRoom",
+    name: "Home",
     component: () =>
-      import(/* webpackChunkName: "landing" */ "../views/CreateRoomView.vue"),
+      import(/* webpackChunkName: "landing" */ "../views/HomeView.vue"),
+    meta: {
+      layout: MainLayout,
+      isUnauthorized: true,
+    },
+  },
+  {
+    path: "/tasks/1",
+    name: "DesktopCards",
+    component: () =>
+      import(/* webpackChunkName: "landing" */ "../views/DesktopCards.vue"),
     meta: {
       layout: MainLayout,
       isUnauthorized: true,
