@@ -1,17 +1,47 @@
 <template lang="pug">
 .bitcoin-transactions
+  router-link(to="/" )
+    q-btn.go-home(color='white' text-color='black' label='home')
   .control-buttons
     q-btn(color="secondary" label="Запуск" @click="subscribeToTransactions")
     q-btn(color="red" label="Зупинка" @click="unsubscribetoTransactions")
     q-btn(color="amber" label="Сброс" @click="resetTransactions")
-  q-table(:title="`Amount: ${amount}`" :rows="rows" :columns="columns" row-key="name")
+  q-table(:title="`Amount: ${amount} BTC`" :rows="rows" :columns="columns" row-key="name")
 </template>
 
 <script setup lang="ts">
-import { reactive, ref } from "vue";
+import { onUnmounted, reactive, ref } from "vue";
 import { useWebSocket } from "@vueuse/core";
+import { Transaction, TransactionInfo } from "@/types/transaction.interface";
 
-const updateAmount = (transaction) => {
+onUnmounted(() => {
+  close();
+});
+
+const amount = ref(0);
+
+const columns = [
+  {
+    name: "name",
+    required: true,
+    label: "From",
+    align: "left",
+    field: "from",
+    sortable: true,
+  },
+  {
+    name: "calories",
+    align: "center",
+    label: "To",
+    field: "to",
+    sortable: true,
+  },
+  { name: "fat", label: "Sum", field: "sum", sortable: true },
+];
+
+let rows = reactive<TransactionInfo[]>([]);
+
+const updateAmount = (transaction: Transaction) => {
   let sum = 0;
   if (transaction && transaction.x && transaction.x.out) {
     const outputs = transaction.x.out;
@@ -22,7 +52,7 @@ const updateAmount = (transaction) => {
   amount.value += sum;
 };
 
-const getTransactionInfo = (transaction) => {
+const getTransactionInfo = (transaction: Transaction) => {
   if (
     !transaction ||
     !transaction.x ||
@@ -32,37 +62,31 @@ const getTransactionInfo = (transaction) => {
     return { from: "Unknown", to: "Unknown", sum: 0 }; // Return default values if transaction data is incomplete
   }
 
-  // Get input and output data from the transaction
   const inputs = transaction.x.inputs;
   const outputs = transaction.x.out;
 
-  // Determine the sender (from) - first address from inputs
   const from = inputs.length > 0 ? inputs[0].prev_out.addr : "Unknown";
 
-  // Determine the recipient (to) - first address from outputs
   const to = outputs.length > 0 ? outputs[0].addr : "Unknown";
 
-  // Calculate the transaction amount (sum) - sum of all output values
   let sum = 0;
   outputs.forEach((output) => {
     sum += output.value;
   });
 
-  // Update the total amount
   updateAmount(transaction);
 
-  // Return an object with the determined parameters
-  return { from, to, sum };
+  return { from, to, sum } as TransactionInfo;
 };
 
 const { status, data, close, send } = useWebSocket(
-  "wss://ws.blockchain.info/inv",
+  `${process.env.VUE_APP_API_URL}`,
   {
     autoReconnect: true,
-    onMessage: (ws, event) => {
-      const transactionInfo = getTransactionInfo(JSON.parse(event.data));
-      console.log(JSON.parse(event.data));
-      // console.log(transactionInfo);
+    onMessage: (ws: WebSocket, event: MessageEvent) => {
+      const transactionInfo: TransactionInfo = getTransactionInfo(
+        JSON.parse(event.data)
+      );
       rows.unshift(transactionInfo);
     },
   }
@@ -87,29 +111,6 @@ const resetTransactions = () => {
 
   rows = [];
 };
-
-const amount = ref(0);
-
-const columns = [
-  {
-    name: "name",
-    required: true,
-    label: "From",
-    align: "left",
-    field: "from",
-    sortable: true,
-  },
-  {
-    name: "calories",
-    align: "center",
-    label: "To",
-    field: "to",
-    sortable: true,
-  },
-  { name: "fat", label: "Sum", field: "sum", sortable: true },
-];
-
-let rows = reactive([]);
 </script>
 
 <style scoped lang="scss">
