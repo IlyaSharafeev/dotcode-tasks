@@ -1,21 +1,92 @@
 <template lang="pug">
 .bitcoin-transactions
   .control-buttons
-    q-btn(color="secondary" label="Запуск")
-    q-btn(color="red" label="Зупинка")
-    q-btn(color="amber" label="Сброс")
+    q-btn(color="secondary" label="Запуск" @click="subscribeToTransactions")
+    q-btn(color="red" label="Зупинка" @click="unsubscribetoTransactions")
+    q-btn(color="amber" label="Сброс" @click="resetTransactions")
   q-table(:title="`Amount: ${amount}`" :rows="rows" :columns="columns" row-key="name")
 </template>
 
 <script setup lang="ts">
-import { ref } from "vue";
-// import { useWebSocket } from "@vueuse/core";
-//
-// const { status, data, send, open, close } = useWebSocket(
-//   "wss://ws.blockchain.info/inv"
-// );
-//
-// console.log(data);
+import { reactive, ref } from "vue";
+import { useWebSocket } from "@vueuse/core";
+
+const updateAmount = (transaction) => {
+  let sum = 0;
+  if (transaction && transaction.x && transaction.x.out) {
+    const outputs = transaction.x.out;
+    outputs.forEach((output) => {
+      sum += output.value;
+    });
+  }
+  amount.value += sum;
+};
+
+const getTransactionInfo = (transaction) => {
+  if (
+    !transaction ||
+    !transaction.x ||
+    !transaction.x.inputs ||
+    !transaction.x.out
+  ) {
+    return { from: "Unknown", to: "Unknown", sum: 0 }; // Return default values if transaction data is incomplete
+  }
+
+  // Get input and output data from the transaction
+  const inputs = transaction.x.inputs;
+  const outputs = transaction.x.out;
+
+  // Determine the sender (from) - first address from inputs
+  const from = inputs.length > 0 ? inputs[0].prev_out.addr : "Unknown";
+
+  // Determine the recipient (to) - first address from outputs
+  const to = outputs.length > 0 ? outputs[0].addr : "Unknown";
+
+  // Calculate the transaction amount (sum) - sum of all output values
+  let sum = 0;
+  outputs.forEach((output) => {
+    sum += output.value;
+  });
+
+  // Update the total amount
+  updateAmount(transaction);
+
+  // Return an object with the determined parameters
+  return { from, to, sum };
+};
+
+const { status, data, close, send } = useWebSocket(
+  "wss://ws.blockchain.info/inv",
+  {
+    autoReconnect: true,
+    onMessage: (ws, event) => {
+      const transactionInfo = getTransactionInfo(JSON.parse(event.data));
+      console.log(JSON.parse(event.data));
+      // console.log(transactionInfo);
+      rows.unshift(transactionInfo);
+    },
+  }
+);
+
+const subscribeToTransactions = () => {
+  send("{ op: ping }");
+
+  send("{ op: unconfirmed_sub }");
+
+  send("{ op: addr_sub, addr: $bitcoin_address }");
+};
+
+const unsubscribetoTransactions = () => {
+  send("{ op: unconfirmed_unsub }");
+
+  send("{ op: addr_unsub, addr: $bitcoin_address }");
+};
+
+const resetTransactions = () => {
+  amount.value = 0;
+
+  rows = [];
+};
 
 const amount = ref(0);
 
@@ -23,141 +94,22 @@ const columns = [
   {
     name: "name",
     required: true,
-    label: "Dessert (100g serving)",
+    label: "From",
     align: "left",
-    field: (row) => row.name,
-    format: (val) => `${val}`,
+    field: "from",
     sortable: true,
   },
   {
     name: "calories",
     align: "center",
-    label: "Calories",
-    field: "calories",
+    label: "To",
+    field: "to",
     sortable: true,
   },
-  { name: "fat", label: "Fat (g)", field: "fat", sortable: true },
-  { name: "carbs", label: "Carbs (g)", field: "carbs" },
-  { name: "protein", label: "Protein (g)", field: "protein" },
-  { name: "sodium", label: "Sodium (mg)", field: "sodium" },
-  {
-    name: "calcium",
-    label: "Calcium (%)",
-    field: "calcium",
-    sortable: true,
-    sort: (a, b) => parseInt(a, 10) - parseInt(b, 10),
-  },
-  {
-    name: "iron",
-    label: "Iron (%)",
-    field: "iron",
-    sortable: true,
-    sort: (a, b) => parseInt(a, 10) - parseInt(b, 10),
-  },
+  { name: "fat", label: "Sum", field: "sum", sortable: true },
 ];
 
-const rows = [
-  {
-    name: "Frozen Yogurt",
-    calories: 159,
-    fat: 6.0,
-    carbs: 24,
-    protein: 4.0,
-    sodium: 87,
-    calcium: "14%",
-    iron: "1%",
-  },
-  {
-    name: "Ice cream sandwich",
-    calories: 237,
-    fat: 9.0,
-    carbs: 37,
-    protein: 4.3,
-    sodium: 129,
-    calcium: "8%",
-    iron: "1%",
-  },
-  {
-    name: "Eclair",
-    calories: 262,
-    fat: 16.0,
-    carbs: 23,
-    protein: 6.0,
-    sodium: 337,
-    calcium: "6%",
-    iron: "7%",
-  },
-  {
-    name: "Cupcake",
-    calories: 305,
-    fat: 3.7,
-    carbs: 67,
-    protein: 4.3,
-    sodium: 413,
-    calcium: "3%",
-    iron: "8%",
-  },
-  {
-    name: "Gingerbread",
-    calories: 356,
-    fat: 16.0,
-    carbs: 49,
-    protein: 3.9,
-    sodium: 327,
-    calcium: "7%",
-    iron: "16%",
-  },
-  {
-    name: "Jelly bean",
-    calories: 375,
-    fat: 0.0,
-    carbs: 94,
-    protein: 0.0,
-    sodium: 50,
-    calcium: "0%",
-    iron: "0%",
-  },
-  {
-    name: "Lollipop",
-    calories: 392,
-    fat: 0.2,
-    carbs: 98,
-    protein: 0,
-    sodium: 38,
-    calcium: "0%",
-    iron: "2%",
-  },
-  {
-    name: "Honeycomb",
-    calories: 408,
-    fat: 3.2,
-    carbs: 87,
-    protein: 6.5,
-    sodium: 562,
-    calcium: "0%",
-    iron: "45%",
-  },
-  {
-    name: "Donut",
-    calories: 452,
-    fat: 25.0,
-    carbs: 51,
-    protein: 4.9,
-    sodium: 326,
-    calcium: "2%",
-    iron: "22%",
-  },
-  {
-    name: "KitKat",
-    calories: 518,
-    fat: 26.0,
-    carbs: 65,
-    protein: 7,
-    sodium: 54,
-    calcium: "12%",
-    iron: "6%",
-  },
-];
+let rows = reactive([]);
 </script>
 
 <style scoped lang="scss">

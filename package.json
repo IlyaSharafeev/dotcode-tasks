@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "@quasar/extras": "^1.0.0",
+    "@vueuse/core": "^10.9.0",
     "draggable-resizable-vue3": "^1.0.94-beta",
     "pinia": "^2.1.7",
     "pinia-plugin-persistedstate": "^3.2.1",
