@@ -6,10 +6,6 @@ div
     draggable-resizable-vue.element(v-for='(element, index) in dataElements' :key='index' v-model:x='element.x' v-model:y='element.y' v-model:h='element.height' v-model:w='element.width' v-model:active='element.isActive' @activated='handleElementActivated(index)' @deactivated='handleElementDeactivated(index)' @dragstop='handleElementDragged' @resizestop='saveElementPositions' :style='{ zIndex: element.zIndex }')
       | Element {{ element.id }}
       q-btn.delete-btn(color='white' text-color='black' @click='removeElement(index)')
-  q-banner.bg-primary.text-white Unfortunately, the credit card did not go through, please try again.
-    template(v-slot:action)
-      q-btn(flat='' color='white' label='Dismiss')
-      q-btn(flat='' color='white' label='Update Credit Card')
   notifications(position="bottom left")
     template(#body='props')
       .notification(@click="props.close")

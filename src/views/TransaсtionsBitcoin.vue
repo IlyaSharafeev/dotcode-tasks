@@ -39,7 +39,7 @@ const columns = [
   { name: "fat", label: "Sum", field: "sum", sortable: true },
 ];
 
-let rows = reactive<TransactionInfo[]>([]);
+let rows = ref<TransactionInfo[]>([]);
 
 const updateAmount = (transaction: Transaction) => {
   let sum = 0;
@@ -87,7 +87,7 @@ const { status, data, close, send } = useWebSocket(
       const transactionInfo: TransactionInfo = getTransactionInfo(
         JSON.parse(event.data)
       );
-      rows.unshift(transactionInfo);
+      rows.value.unshift(transactionInfo);
     },
   }
 );
@@ -109,7 +109,7 @@ const unsubscribetoTransactions = () => {
 const resetTransactions = () => {
   amount.value = 0;
 
-  rows = [];
+  rows.value = [];
 };
 </script>
 
