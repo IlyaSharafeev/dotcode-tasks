@@ -6,7 +6,16 @@ div
     draggable-resizable-vue.element(v-for='(element, index) in dataElements' :key='index' v-model:x='element.x' v-model:y='element.y' v-model:h='element.height' v-model:w='element.width' v-model:active='element.isActive' @activated='handleElementActivated(index)' @deactivated='handleElementDeactivated(index)' @dragstop='handleElementDragged' @resizestop='saveElementPositions' :style='{ zIndex: element.zIndex }')
       | Element {{ element.id }}
       q-btn.delete-btn(color='white' text-color='black' @click='removeElement(index)')
-  q-btn.add-btn(color='white' text-color='black' label='+' @click='addElement')
+  q-banner.bg-primary.text-white Unfortunately, the credit card did not go through, please try again.
+    template(v-slot:action)
+      q-btn(flat='' color='white' label='Dismiss')
+      q-btn(flat='' color='white' label='Update Credit Card')
+  notifications(position="bottom left")
+    template(#body='props')
+      .notification(@click="props.close")
+        .notification__title {{ props.item.title }}
+        .notification__description(v-html='props.item.text')
+        q-btn.notification__button(color='primary' label='come back' @click="restoreLastDeletedElement")
 </template>
 
 <script setup>
@@ -15,6 +24,11 @@ import {
   DraggableResizableVue,
   DraggableResizableContainer,
 } from "draggable-resizable-vue3";
+import { Notifications, useNotification } from "@kyvg/vue3-notification";
+
+const notification = useNotification();
+
+const deletedElements = ref([]);
 
 const dataElements = ref([
   {
@@ -94,33 +108,37 @@ const handleElementDragged = () => {
   saveElementPositions();
 };
 
-const addElement = () => {
+const removeElement = (index) => {
+  const deletedElement = dataElements.value.splice(index, 1)[0];
+  deletedElements.value.push(deletedElement);
   saveElementPositions();
-  const containerWidth = document.querySelector(".container").offsetWidth;
-  const containerHeight = document.querySelector(".container").offsetHeight;
-  const savedPositions = localStorage.getItem(localStorageKey);
-  let newId = JSON.parse(savedPositions).length;
-
-  const newElement = {
-    id: ++newId,
-    x: (containerWidth - 300) / 2,
-    y: (containerHeight - 100) / 2,
-    width: 300,
-    height: 100,
-    zIndex: 2,
-    isActive: false,
-  };
-  dataElements.value.push(newElement);
-  saveElementPositions();
+  notification.notify({
+    duration: 5000,
+    closeOnClick: true,
+    ignoreDuplicates: true,
+    title: "I'm a deleted element",
+    text: "You can bring me back",
+  });
 };
 
-const removeElement = (index) => {
-  dataElements.value.splice(index, 1);
-  saveElementPositions();
+const restoreLastDeletedElement = () => {
+  const lastDeleted = deletedElements.value.pop();
+  if (lastDeleted) {
+    const containerWidth = document.querySelector(".container").offsetWidth;
+    const containerHeight = document.querySelector(".container").offsetHeight;
+    lastDeleted.x = (containerWidth - 300) / 2;
+    lastDeleted.y = (containerHeight - 100) / 2;
+    lastDeleted.width = 300;
+    lastDeleted.height = 100;
+    dataElements.value.push(lastDeleted);
+    saveElementPositions();
+  }
 };
 </script>
 
 <style lang="scss">
+@import "@/assets/scss/notification";
+
 .container {
   width: 100%;
   height: 100vh;

@@ -8,12 +8,10 @@
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
+    "@kyvg/vue3-notification": "^3.2.1",
     "@quasar/extras": "^1.0.0",
     "@vueuse/core": "^10.9.0",
     "draggable-resizable-vue3": "^1.0.94-beta",
-    "pinia": "^2.1.7",
-    "pinia-plugin-persistedstate": "^3.2.1",
-    "pinia-shared-state": "^0.5.1",
     "pug": "^3.0.2",
     "quasar": "^2.0.0",
     "sass": "^1.75.0",

@@ -1,0 +1,23 @@
+.notification {
+  border-radius: 5px;
+  margin: 15px;
+  padding: 10px 15px;
+  color: rgba(0, 0, 0, 0.76);
+  background-color: rgba(255, 255, 255, 0.63);
+  box-shadow: rgba(9, 30, 66, 0.25) 0px 4px 8px -2px, rgba(9, 30, 66, 0.08) 0px 0px 0px 1px;
+
+  &__title {
+    color: #035ba4;
+    text-transform: uppercase;
+  }
+
+  &__description {
+    font-weight: bold;
+    color: #035ba4;
+  }
+
+  &__button {
+    width: 120px;
+    margin: 15px 0;
+  }
+}
