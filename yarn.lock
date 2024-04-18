@@ -179,7 +179,7 @@
 
 "@babel/runtime@7.23.4":
   version "7.23.4"
-  resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.23.4.tgz#36fa1d2b36db873d25ec631dcc4923fdc1cf2e2e"
+  resolved "https://registry.npmjs.org/@babel/runtime/-/runtime-7.23.4.tgz"
   integrity sha512-2Yv65nlWnWlSpe3fXEyX5i7fx5kIKo4Qbcj+hMO0odwaneFjfXw5fdum+4yL20O0QiaHpia0cYQ9xpNMqrBwHg==
   dependencies:
     regenerator-runtime "^0.14.0"
@@ -356,7 +356,7 @@
 
 "@quasar/extras@^1.0.0":
   version "1.16.11"
-  resolved "https://registry.yarnpkg.com/@quasar/extras/-/extras-1.16.11.tgz#84b1efb9097a6e58c3ebfdd5da83ac658056a35c"
+  resolved "https://registry.npmjs.org/@quasar/extras/-/extras-1.16.11.tgz"
   integrity sha512-sbTBHOA+Hi7ah0P6qSm+xfRXqwJ94ct3NKA3Lkq3iNPYuHD7VXbSWtP2eA7Cu9Fd0WjVoPbngf6yFGg46U3IfQ==
 
 "@sideway/address@^4.1.5":
@@ -1340,7 +1340,7 @@ braces@^3.0.2, braces@~3.0.2:
 
 broadcast-channel@^7.0.0:
   version "7.0.0"
-  resolved "https://registry.yarnpkg.com/broadcast-channel/-/broadcast-channel-7.0.0.tgz#715823823a9c6eb4ade02abc26b9767d7cc1d075"
+  resolved "https://registry.npmjs.org/broadcast-channel/-/broadcast-channel-7.0.0.tgz"
   integrity sha512-a2tW0Ia1pajcPBOGUF2jXlDnvE9d5/dg6BG9h60OmRUcZVr/veUrU8vEQFwwQIhwG3KVzYwSk3v2nRRGFgQDXQ==
   dependencies:
     "@babel/runtime" "7.23.4"
@@ -2039,7 +2039,7 @@ dotenv@^10.0.0:
 
 draggable-resizable-vue3@^1.0.94-beta:
   version "1.0.94-beta"
-  resolved "https://registry.yarnpkg.com/draggable-resizable-vue3/-/draggable-resizable-vue3-1.0.94-beta.tgz#27571b5d4301829ff2c5f4cf61aa40e0d004cadb"
+  resolved "https://registry.npmjs.org/draggable-resizable-vue3/-/draggable-resizable-vue3-1.0.94-beta.tgz"
   integrity sha512-5faM6lkLIrh9lgiviOeA+kOYatU6MjGHiA93P4B/eFTGYu9EkLDniN0QudhxTm60aLAFLBO3QlZOskeYKTH9dg==
 
 duplexer@^0.1.2:
@@ -3716,7 +3716,7 @@ object-inspect@^1.13.1:
 
 oblivious-set@1.4.0:
   version "1.4.0"
-  resolved "https://registry.yarnpkg.com/oblivious-set/-/oblivious-set-1.4.0.tgz#1ee7c90f0605bb2a182fbcc8fffbe324d9994b43"
+  resolved "https://registry.npmjs.org/oblivious-set/-/oblivious-set-1.4.0.tgz"
   integrity sha512-szyd0ou0T8nsAqHtprRcP3WidfsN1TnAR5yWXf2mFCEr5ek3LEOkT6EZ/92Xfs74HIdyhG5WkGxIssMU0jBaeg==
 
 obuf@^1.0.0, obuf@^1.1.2:
@@ -3819,7 +3819,7 @@ p-locate@^4.1.0:
 
 p-queue@6.6.2:
   version "6.6.2"
-  resolved "https://registry.yarnpkg.com/p-queue/-/p-queue-6.6.2.tgz#2068a9dcf8e67dd0ec3e7a2bcb76810faa85e426"
+  resolved "https://registry.npmjs.org/p-queue/-/p-queue-6.6.2.tgz"
   integrity sha512-RwFpb72c/BhQLEXIZ5K2e+AhgNVmIejGlTgiB9MzZ0e93GRvqZ7uSi0dvRF7/XIXDeNkra2fNHBxTyPDGySpjQ==
   dependencies:
     eventemitter3 "^4.0.4"
@@ -3835,7 +3835,7 @@ p-retry@^4.5.0:
 
 p-timeout@^3.2.0:
   version "3.2.0"
-  resolved "https://registry.yarnpkg.com/p-timeout/-/p-timeout-3.2.0.tgz#c7e17abc971d2a7962ef83626b35d635acf23dfe"
+  resolved "https://registry.npmjs.org/p-timeout/-/p-timeout-3.2.0.tgz"
   integrity sha512-rhIwUycgwwKcP9yTOOFK/AKsAopjjCakVqLHePO3CC6Mir1Z99xT+R63jZxAT5lFZLa2inS5h+ZS2GvR99/FBg==
   dependencies:
     p-finally "^1.0.0"
@@ -3952,12 +3952,12 @@ picomatch@^2.0.4, picomatch@^2.2.1, picomatch@^2.3.1:
 
 pinia-plugin-persistedstate@^3.2.1:
   version "3.2.1"
-  resolved "https://registry.yarnpkg.com/pinia-plugin-persistedstate/-/pinia-plugin-persistedstate-3.2.1.tgz#66780602aecd6c7b152dd7e3ddc249a1f7a13fe5"
+  resolved "https://registry.npmjs.org/pinia-plugin-persistedstate/-/pinia-plugin-persistedstate-3.2.1.tgz"
   integrity sha512-MK++8LRUsGF7r45PjBFES82ISnPzyO6IZx3CH5vyPseFLZCk1g2kgx6l/nW8pEBKxxd4do0P6bJw+mUSZIEZUQ==
 
 pinia-shared-state@^0.5.1:
   version "0.5.1"
-  resolved "https://registry.yarnpkg.com/pinia-shared-state/-/pinia-shared-state-0.5.1.tgz#e5db31cc24b51263776c65cc3d4ca6b2350d61bb"
+  resolved "https://registry.npmjs.org/pinia-shared-state/-/pinia-shared-state-0.5.1.tgz"
   integrity sha512-vPgKLrMSVhubQ1TPC+t9Vg2j2cabbJZDybxeG9BxVHrAFw35jb4IBvfFg9JGv+ULKxIdRvvg4u4I0zan2Juqqg==
   dependencies:
     broadcast-channel "^7.0.0"
@@ -3965,7 +3965,7 @@ pinia-shared-state@^0.5.1:
 
 pinia@^2.1.7:
   version "2.1.7"
-  resolved "https://registry.yarnpkg.com/pinia/-/pinia-2.1.7.tgz#4cf5420d9324ca00b7b4984d3fbf693222115bbc"
+  resolved "https://registry.npmjs.org/pinia/-/pinia-2.1.7.tgz"
   integrity sha512-+C2AHFtcFqjPih0zpYuvof37SFxMQ7OEG2zV9jRI12i9BOy3YQVAHwdKtyyc8pDcDyIc33WCIsZaCFWU7WWxGQ==
   dependencies:
     "@vue/devtools-api" "^6.5.0"
@@ -4447,7 +4447,7 @@ qs@6.11.0:
 
 quasar@^2.0.0:
   version "2.15.2"
-  resolved "https://registry.yarnpkg.com/quasar/-/quasar-2.15.2.tgz#8c945c87d8723696614a56a17ffcc041d8a26ab6"
+  resolved "https://registry.npmjs.org/quasar/-/quasar-2.15.2.tgz"
   integrity sha512-euCm5Elo5SfGNRY18HvKAknkBwesoUAFhZ6BxmliiEVHGes53ZcUKnMwZU/XsRhwiC6VQzBBSk/U0iEcdp/NyA==
 
 queue-microtask@^1.2.2:
@@ -4527,7 +4527,7 @@ readdirp@~3.6.0:
 
 regenerator-runtime@^0.14.0:
   version "0.14.1"
-  resolved "https://registry.yarnpkg.com/regenerator-runtime/-/regenerator-runtime-0.14.1.tgz#356ade10263f685dda125100cd862c1db895327f"
+  resolved "https://registry.npmjs.org/regenerator-runtime/-/regenerator-runtime-0.14.1.tgz"
   integrity sha512-dYnhHh0nJoMfnkZs6GmmhFknAGRrLznOu5nc9ML+EJxGvrx6H7teuevqVqCuPcPK//3eDrrjQhehXVx9cnkGdw==
 
 regexpp@^3.1.0:
@@ -4874,7 +4874,7 @@ sockjs@^0.3.24:
 
 "source-map-js@>=0.6.2 <2.0.0", source-map-js@^1.2.0:
   version "1.2.0"
-  resolved "https://registry.npmjs.org/source-map-js/-/source-map-js-1.2.0.tgz"
+  resolved "https://registry.yarnpkg.com/source-map-js/-/source-map-js-1.2.0.tgz#16b809c162517b5b8c3e7dcd315a2a5c2612b2af"
   integrity sha512-itJW8lvSA0TXEphiRoawsCksnlf8SyvmFzIhltqAHluXd88pkCd+cXJVHTDwdCr0IzwptSm035IHQktUu1QUMg==
 
 source-map-support@~0.5.20:
@@ -5272,7 +5272,7 @@ universalify@^2.0.0:
 
 unload@2.4.1:
   version "2.4.1"
-  resolved "https://registry.yarnpkg.com/unload/-/unload-2.4.1.tgz#b0c5b7fb44e17fcbf50dcb8fb53929c59dd226a5"
+  resolved "https://registry.npmjs.org/unload/-/unload-2.4.1.tgz"
   integrity sha512-IViSAm8Z3sRBYA+9wc0fLQmU9Nrxb16rcDmIiR6Y9LJSZzI7QY5QsDhqPpKOjAn0O9/kfK1TfNEMMAGPTIraPw==
 
 unpipe@1.0.0, unpipe@~1.0.0:
@@ -5340,7 +5340,7 @@ void-elements@^3.1.0:
 
 vue-cli-plugin-quasar@~5.0.2:
   version "5.0.2"
-  resolved "https://registry.yarnpkg.com/vue-cli-plugin-quasar/-/vue-cli-plugin-quasar-5.0.2.tgz#f089d386a75bd4dcfecd4cdd14406059a2c288a3"
+  resolved "https://registry.npmjs.org/vue-cli-plugin-quasar/-/vue-cli-plugin-quasar-5.0.2.tgz"
   integrity sha512-grbeB8cQmHPmF8Lcf4go+fGNYF5RYbK0HRFyW+cPYil6z8SvH3m9podwP7jFVafBpOs731UFxfSJV1R1boQa1w==
   dependencies:
     loader-utils "^1.4.0"
@@ -5348,7 +5348,7 @@ vue-cli-plugin-quasar@~5.0.2:
 
 vue-demi@>=0.14.5, vue-demi@^0.14.6:
   version "0.14.7"
-  resolved "https://registry.yarnpkg.com/vue-demi/-/vue-demi-0.14.7.tgz#8317536b3ef74c5b09f268f7782e70194567d8f2"
+  resolved "https://registry.npmjs.org/vue-demi/-/vue-demi-0.14.7.tgz"
   integrity sha512-EOG8KXDQNwkJILkx/gPcoL/7vH+hORoBaKgGe+6W7VFMvCYJfmF2dGbvgDroVnI8LU7/kTu8mbjRZGBU1z9NTA==
 
 vue-eslint-parser@^8.0.0, vue-eslint-parser@^8.0.1:
@@ -5380,7 +5380,7 @@ vue-loader@^17.0.0:
 
 vue-router@^4.3.1:
   version "4.3.1"
-  resolved "https://registry.yarnpkg.com/vue-router/-/vue-router-4.3.1.tgz#05943e16781d8feb5195a932824afecd4d0b8282"
+  resolved "https://registry.npmjs.org/vue-router/-/vue-router-4.3.1.tgz"
   integrity sha512-D0h3oyP6vp28BOvxv2hVpiqFTjTJizCf1BuMmCibc8UW0Ll/N80SWqDd/hqPMaZfzW1j+s2s+aTRyBIP9ElzOw==
   dependencies:
     "@vue/devtools-api" "^6.5.1"

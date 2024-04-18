@@ -1,42 +1,12 @@
-<template>
-  <div>
-    <draggable-resizable-container
-      :grid="[10, 10]"
-      :show-grid="true"
-      class="container"
-    >
-      <draggable-resizable-vue
-        v-for="(element, index) in dataElements"
-        :key="index"
-        v-model:x="element.x"
-        v-model:y="element.y"
-        v-model:h="element.height"
-        v-model:w="element.width"
-        v-model:active="element.isActive"
-        class="element"
-        @activated="handleElementActivated(index)"
-        @deactivated="handleElementDeactivated(index)"
-        @dragstop="handleElementDragged"
-        @resizestop="saveElementPositions"
-        :style="{ zIndex: element.zIndex }"
-      >
-        Element {{ element.id }}
-        <q-btn
-          color="white"
-          text-color="black"
-          @click="removeElement(index)"
-          class="delete-btn"
-        />
-      </draggable-resizable-vue>
-    </draggable-resizable-container>
-    <q-btn
-      color="white"
-      text-color="black"
-      label="+"
-      @click="addElement"
-      class="add-btn"
-    />
-  </div>
+<template lang="pug">
+div
+  router-link(to="/" )
+    q-btn.go-home(color='white' text-color='black' label='home')
+  draggable-resizable-container.container(:grid='[10, 10]' :show-grid='true')
+    draggable-resizable-vue.element(v-for='(element, index) in dataElements' :key='index' v-model:x='element.x' v-model:y='element.y' v-model:h='element.height' v-model:w='element.width' v-model:active='element.isActive' @activated='handleElementActivated(index)' @deactivated='handleElementDeactivated(index)' @dragstop='handleElementDragged' @resizestop='saveElementPositions' :style='{ zIndex: element.zIndex }')
+      | Element {{ element.id }}
+      q-btn.delete-btn(color='white' text-color='black' @click='removeElement(index)')
+  q-btn.add-btn(color='white' text-color='black' label='+' @click='addElement')
 </template>
 
 <script setup>
@@ -50,7 +20,7 @@ const dataElements = ref([
   {
     id: 1,
     x: 20,
-    y: 20,
+    y: 100,
     width: 300,
     height: 100,
     zIndex: 2,
@@ -115,8 +85,9 @@ const loadElementPositions = () => {
   }
 };
 
-onMounted(() => {
-  loadElementPositions();
+onMounted(async () => {
+  await loadElementPositions();
+  await saveElementPositions();
 });
 
 const handleElementDragged = () => {
@@ -169,6 +140,10 @@ const removeElement = (index) => {
     box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px,
       rgba(0, 0, 0, 0.22) 0px 10px 10px;
 
+    &:hover {
+      background-color: #6666ff;
+    }
+
     .delete-btn {
       background: url("@/assets/icons/delete-icon.svg") center no-repeat !important;
       background-color: white !important;
@@ -180,7 +155,8 @@ const removeElement = (index) => {
 }
 
 .add-btn {
-  background-color: white;
+  background-color: rgba(0, 0, 0, 0.76) !important;
+  color: #ffffff !important;
   position: absolute;
   bottom: 30px;
   right: 30px;
@@ -192,5 +168,14 @@ const removeElement = (index) => {
   box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
     rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
     rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+}
+
+.go-home {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  background-color: #ffffff !important;
+  cursor: pointer;
+  z-index: 5;
 }
 </style>

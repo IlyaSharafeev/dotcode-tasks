@@ -1,8 +1,7 @@
-<template>
-  <div class="home">
-    <router-link to="/tasks/1" class="btn air">Task №1</router-link>
-    <router-link to="/tasks/2" class="btn air">Task №2</router-link>
-  </div>
+<template lang="pug">
+.home
+  router-link.btn.air(to='/tasks/1') Task &numero;1
+  router-link.btn.air(to='/tasks/2') Task &numero;2
 </template>
 
 <script setup lang="ts"></script>

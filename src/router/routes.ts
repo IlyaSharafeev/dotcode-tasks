@@ -22,6 +22,18 @@ const routes: Array<RouteRecordRaw> = [
       isUnauthorized: true,
     },
   },
+  {
+    path: "/tasks/2",
+    name: "Transactions",
+    component: () =>
+      import(
+        /* webpackChunkName: "landing" */ "../views/TransaсtionsBitcoin.vue"
+      ),
+    meta: {
+      layout: MainLayout,
+      isUnauthorized: true,
+    },
+  },
 ];
 
 export default routes;
